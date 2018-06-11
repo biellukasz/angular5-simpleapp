@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.nav-pills li {
+  margin-left: 5px;
+}
+
+.nav-pills a {
+ font-size: large;
+}

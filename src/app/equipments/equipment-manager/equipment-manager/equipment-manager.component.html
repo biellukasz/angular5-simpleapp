@@ -1,0 +1,35 @@
+<form>
+  <div class="form-group">
+    <label>Type</label>
+    <select name="role" class="form-control" [(ngModel)]="equipment.type">
+      <option *ngFor="let equipmentType of equipmentTypes" [value]="equipmentType">{{equipmentType}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="toFix">Broken</label>
+    <input class="form-check-input"  type="checkbox" name="toFix" [(ngModel)]="equipment.toFix" placeholder="toFix" name="toFix" class="form-control" id="toFix">
+  </div>
+  <form [formGroup]="form">
+    <div formArrayName="properties">
+      <div *ngFor="let item of form.get('properties').controls; let i = index" [formGroup]="form.get('properties').controls[i]">
+        <input class="form-control" type="text" formControlName="parameterName" placeholder="property name">
+        <input class="form-control" type="text" formControlName="parameterValue" placeholder="property value">
+        <button type="button" (click)="form.get('properties').removeAt(i)">remove</button>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" type="button" (click)="addItem()">Add Property</button>
+  </form>
+  <form [formGroup]="formComments">
+    <div formArrayName="comments">
+      <div *ngFor="let comment of formComments.get('comments').controls; let i = index" [formGroup]="formComments.get('comments').controls[i]">
+        <input class="form-control" type="text" formControlName="commentValue" placeholder="comment">
+        <button type="button" (click)="formComments.get('comments').removeAt(i)">remove</button>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" type="button" (click)="addComment()">Add Comment</button>
+  </form>
+
+
+  <button class="btn btn-success" (click)="createEquipment()">Create</button>
+  </form>
